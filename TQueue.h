@@ -136,12 +136,12 @@ public:
 		{
 			TQueue<T>::size = TQueue<T>::size * 2;
 			T* tmp = new T[TQueue<T>::size];
-			for (int i = 0; i < TQueue<T>::size; i++)
+			for (int i = 0; i < (TQueue<T>::end - TQueue<T>::begin); i++)
 			{
-				tmp[i] = TQueue<T>::array[i];
+				tmp[i] = TQueue<T>::array[i + (TQueue<T>::begin - TQueue<T>::array)];
 			}
 			delete[] TQueue<T>::array;
-			TQueue<T>::end = tmp + (TQueue<T>::end - TQueue<T>::array);
+			TQueue<T>::end = tmp + (TQueue<T>::end - TQueue<T>::begin);
 			TQueue<T>::array = tmp;
 			TQueue<T>::begin = TQueue<T>::array;
 		}
@@ -152,10 +152,12 @@ public:
 			beginMove += arrayOfPriority[i];
 		}
 
+		beginMove += (TQueue<T>::begin - TQueue<T>::array);
+
 		int numMove = 0;
 		for (int i = priority + 1; i < amountOfPriority; i++)
 		{
-			numMove += arrayOfPriority[i] + (TQueue<T>::begin - TQueue<T>::array);
+			numMove += arrayOfPriority[i];
 		}
 
 		arrayOfPriority[priority]++;
@@ -166,6 +168,14 @@ public:
 		}
 		TQueue<T>::array[beginMove] = a;
 		TQueue<T>::end++;
+	}
+
+	void pop()
+	{
+		TQueue<T>::pop();
+		int i = 0;
+		for( ; arrayOfPriority[i] == 0; i++){}
+		arrayOfPriority[i]--;
 	}
 
 	~TQueuePr()
