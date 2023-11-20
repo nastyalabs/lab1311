@@ -23,6 +23,8 @@ int main()
 	quPr2.push(5, 1);
 	std::cout << quPr2 << std::endl;
 	quPr2.pop();
+	quPr2.push(6, 1);
+	quPr2.push(7, 0);
 	std::cout << quPr2 << std::endl;
 	return 0;
 }
