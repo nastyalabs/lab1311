@@ -1,3 +1,0 @@
-﻿  Source.cpp
-C:\Users\olegp\source\repos\lab1311\TQueue\Source.cpp(4,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  TQueue.vcxproj -> C:\Users\olegp\source\repos\lab1311\x64\Debug\TQueue.exe
