@@ -47,7 +47,7 @@ std::ostream& operator<<(std::ostream& ostr, const TStackQueue<T>& obj) {
 
 template <class T>
 TStackQueue<T>::TStackQueue(int n) {
-	if ((n < 1) || (n > MAX_STACK_SIZE)) throw std::length_error("Invalid queue size!");
+	if ((n < 1) || (n > MAX_QUEUE_SIZE)) throw std::length_error("Invalid queue size!");
 	_size = n;
 	s1 = TStack<T>(_size);
 	s2 = TStack<T>(_size);
