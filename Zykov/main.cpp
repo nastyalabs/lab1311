@@ -1,5 +1,6 @@
 #include "TQueue.h"
 #include "TPriorityQueue.h"
+#include "TStackQueue.h"
 #include <iostream>
 
 int main() {
@@ -11,6 +12,8 @@ int main() {
 	std::cout << simple_q << std::endl; // 1 2 3
 	simple_q.pop();
 	std::cout << simple_q << std::endl; // 2 3
+	simple_q.push(1);
+	std::cout << simple_q << std::endl; // 2 3 1
 	std::cout << simple_q.top() << std::endl << std::endl; // 2
 
 	// priority queue
@@ -44,11 +47,19 @@ int main() {
 		}
 		temp.pop();
 	}
-	std::cout << std::endl << "Smallest elem: " << smallestEl << std::endl; // 2
+	std::cout << std::endl << "Smallest elem: " << smallestEl << std::endl << std::endl; // 2
 
-
-
-
+	//3 stack-based queue
+	TStackQueue<int> stack_queue;
+	stack_queue.Push(1);
+	stack_queue.Push(2);
+	stack_queue.Push(3);
+	std::cout << stack_queue << std::endl; // 1 2 3
+	stack_queue.Pop();
+	std::cout << stack_queue << std::endl; // 2 3
+	stack_queue.Push(1);
+	std::cout << stack_queue << std::endl; // 2 3 1
+	std::cout << stack_queue.Top() << std::endl << std::endl; // 2
 
 	return 0;
 }
