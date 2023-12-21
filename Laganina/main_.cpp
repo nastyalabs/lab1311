@@ -1,5 +1,18 @@
 #include "tqueue.h"
 #include"tqueue_priority.h"
+#include"tqueue_stack.h"
+
+int min(const TQueue_stack<int>& q) {
+	TQueue_stack<int> buffer = q;
+	int m = buffer.pop();
+	while (!buffer.isEmpty()) {
+		int buf = buffer.pop();
+		if (buf < m) {
+			m = buf;
+		}
+	}
+	return m;
+}
 int main() {
 	TQueue <int> q1;
 
@@ -29,6 +42,21 @@ int main() {
 	q3.push(c);
 	q3.push(a);
 	std::cout << q3 << std::endl;
-	for (size_t i = 0; i < 3; i++) { std::cout << q3.pop() << " "; }
-	
+	for (size_t i = 0; i < 3; i++) { std::cout << q3.pop() << "    "<<std::endl; }
+	TQueue_stack<int> qs;
+	std::cout << qs.size() << std::endl;
+	qs.push(3);
+	std::cout << qs.pop() << std::endl;
+	for (int i = 0; i < 5; i++) {
+		qs.push(i);
+	}
+
+	int m= min(qs);
+	std::cout << m << std::endl;
+	for (int i = 0; i < 5; i++) {
+		std::cout << qs.pop() << "   ";
+	}
+	std::cout << qs.isFull() << std::endl;
+	std::cout << qs.isEmpty() << std::endl;
+
 }
