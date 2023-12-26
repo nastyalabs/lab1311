@@ -17,9 +17,6 @@ private:
     TStack<T> stack2;
 public:
     TPriority_queue(){}
-    TPriority_queue(const TStack<T> &stack) {
-        this->stack = stack;
-    }
 
     TPriority_queue(const TPriority_queue<T> &queueTStack) {
         this->stack1 = queueTStack.stack1;
