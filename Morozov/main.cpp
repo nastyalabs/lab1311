@@ -2,8 +2,6 @@
 #include <queue>
 #include "TQueue.h"
 #include "TQueue_TStack.h"
-#include "TPriority_Queue.h"
-#include "TPriority_queue1.h"
 using namespace  std;
 int main() {
     //Очередь на динамическом массиве
@@ -19,22 +17,13 @@ int main() {
     }
     cout<<queue.size()<<endl; // 0
 
-    //Очередь на стеке (TStack)
-    TQueue_TStack<int> queueTStack;
-    queueTStack.push(10);
-    queueTStack.push(20);
-    queueTStack.push(30);
-    cout<<queueTStack.pop()<<endl; // 10
-    cout<<queueTStack.size()<<endl; // 2;
-    cout<<queueTStack.front()<<" "<<queueTStack.back()<<endl; //20 30
-    cout<<queueTStack.isEmpty()<<endl; // false;
-
-    //Приоритетная очередь, для правильной работы класс T должен иметь переопределенный оператор<
-    TPriority_Queue<int> priorityQueue;
-    priorityQueue.push(4); // Queue - 4
-    priorityQueue.push(13); // Queue - 13,4
-    priorityQueue.push(10); // Queue - 13,10,4
-    cout<<priorityQueue.pop()<<endl; // 13;
-    cout<<priorityQueue.front()<<" "<<priorityQueue.back()<<endl; // 10 4
+    //Очередь на стеке (TStack) класс T должен переопределять оператор '<'
+    TPriority_queue<int> queueTStack;
+    queueTStack.push(10); //10
+    queueTStack.push(20);//20 10
+    queueTStack.push(30); //30 20 10
+    cout<<queueTStack.back()<<endl;  //10 O(1) Минимальный элемент приоритетной очереди
+    cout<<queueTStack.pop()<<endl; //30
+    cout<<queueTStack.pop()<<endl; //20
     return 0;
 }

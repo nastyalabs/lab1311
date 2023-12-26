@@ -11,60 +11,71 @@
 using namespace std;
 
 template<class T>
-class TQueue_TStack {
+class TPriority_queue {
 private:
-    TStack<T> stack;
+    TStack<T> stack1;
+    TStack<T> stack2;
 public:
-    TQueue_TStack() {
-//        stack = new TStack<T>();
-    }
-
-    TQueue_TStack(const TStack<T> &stack) {
+    TPriority_queue(){}
+    TPriority_queue(const TStack<T> &stack) {
         this->stack = stack;
     }
 
-    TQueue_TStack(const TQueue_TStack<T> &queueTStack) {
-        this->stack = queueTStack.stack;
+    TPriority_queue(const TPriority_queue<T> &queueTStack) {
+        this->stack1 = queueTStack.stack1;
+        this->stack2 = queueTStack.stack2;
     }
 
     void push(T el) {
-        stack.push(el);
+        while (!stack1.isEmpty()) {
+            T elem = stack1.top();
+            if (elem < el) {
+                stack2.push(stack1.pop());
+            } else {
+                break;
+            }
+        }
+        stack2.push(el);
+        while (!stack1.isEmpty()) {
+            stack2.push(stack1.pop());
+        }
+        while (!stack2.isEmpty()) {
+            stack1.push(stack2.pop());
+        }
     }
 
     T pop() {
-        TStack<T> new_stack;
-        while (!stack.isEmpty()) {
-            new_stack.push(stack.pop());
+        while (!stack1.isEmpty()){
+            stack2.push(stack1.pop());
         }
-        T res = new_stack.pop();
-        while (!new_stack.isEmpty()) {
-            stack.push(new_stack.pop());
+        T el = stack2.pop();
+        while (!stack2.isEmpty()){
+            stack1.push(stack2.pop());
         }
-        return res;
+        return el;
     }
 
     bool isEmpty() {
-        return stack.isEmpty();
+        return stack1.isEmpty();
     }
 
     int size() {
-        return stack.getSize();
+        return stack1.getSize();
     }
 
     T front() {
-        TStack<T> new_stack;
-        while (!stack.isEmpty()) {
-            new_stack.push(stack.pop());
+        while (!stack1.isEmpty()) {
+            stack2.push(stack1.pop());
         }
-        T res = new_stack.top();
-        while (!new_stack.isEmpty()) {
-            stack.push(new_stack.pop());
+        T res = stack2.top();
+        while (!stack2.isEmpty()) {
+            stack1.push(stack2.pop());
         }
         return res;
     }
-
+    // Минимальный элемент очереди
     T back() {
-        return stack.top();
+        return stack1.top();
     }
 
 };
